@@ -5,5 +5,9 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 	<!-- spring container한테 정보 줄때 사용하는 element (객체 생성하는 거랑 같은 의미) -->
 	<bean id="userBean" class="kr.or.connect.diexam01.UserBean"></bean>
-
+	<bean id="e" class="kr.or.connect.diexam01.Engine"></bean>
+	<bean id="c" class="kr.or.connect.diexam01.Car">
+		<property name="engine" ref="e"></property>
+	</bean>
+	
 </beans>
