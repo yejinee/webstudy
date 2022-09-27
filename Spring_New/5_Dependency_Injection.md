@@ -11,8 +11,16 @@
 - IoC Contaier에 User가 만든 class를 bean으로 설정하면 등록됌
 - 각각의 Bean들 끼리는 서로 의존(사용) 가능
 
+
+<br>
+</br>
+
 ## 2. Spring Container 개요
 - ApplcationContext Interface에서 Bean객체 생성 + 설정값 입혀서 관리
+
+![AOP_Structure](/Spring_New/Image/IOC_Structure.png)
+
+
 
 ### ✔ Bean등록
 - 과거는 xml기반으로 설정 관리
