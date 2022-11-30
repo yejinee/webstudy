@@ -37,7 +37,7 @@
 ### ✔ Weaving
 - Advice를 비즈니스 로직 코드에 삽입하는 것을 말함
 
-![AOP_Structure](/Spring_New/Image/AOP_Structure.png)
+![AOP_Structure](/Image/AOP_Structure.png)
 
 
 <br>

@@ -18,7 +18,7 @@
 ## 2. Spring Container 개요
 - ApplcationContext Interface에서 Bean객체 생성 + 설정값 입혀서 관리
 
-![AOP_Structure](/Spring_New/Image/IOC_Structure.png)
+![AOP_Structure](/Image/IOC_Structure.png)
 
 
 

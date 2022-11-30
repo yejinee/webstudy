@@ -57,3 +57,9 @@ compileOnly("org.projectlombok:lombok:")
 - Model / Repository / Service / Controller 4개의  Layer로 나눠서 구현
     - 각 Layer가 제 역할만 하기 위함
     - 코드가 복잡하게 꼬이는거 방지 (코드 관리 용이)
+
+<br>
+</br>
+
+## 4. Live Template지정
+- Settings ☞ Live Template ☞ Java에서 추가
