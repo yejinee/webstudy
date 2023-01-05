@@ -9,6 +9,7 @@ Web server failed to start. Port 8080 was already in use.
 ### (2). 활성 연결된 프로세스 목록 확인
 ```
 netstat -ano
+// netstat -ano | find "포트번호"
 ```
 ### (3). Port에 해당하는 Process Kill
 ```

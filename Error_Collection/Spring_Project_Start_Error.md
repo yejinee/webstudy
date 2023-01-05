@@ -23,3 +23,12 @@ Related gradle configuration was not found. "Please, re-import the Gradle projec
 - View 위치
     - [ View - Tool Windows - Gradle ]  
 
+
+## 3. java: error: release version 19 not supported
+```
+java: error: release version 19 not supported
+```
+
+## ✔ 해결방안
+- Settings -> Compiler -> Java Compiler
+- Project Bytecode version 확인
