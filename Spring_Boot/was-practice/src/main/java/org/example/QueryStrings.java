@@ -20,4 +20,11 @@ public class QueryStrings {
                 });
 
     }
+    // key가 존재하면 value를 추출
+    public String getValue(String key) {
+        return this.queryStrings.stream().filter(queryString -> queryString.exists(key))
+                .map(QueryString::getValue)
+                .findFirst()
+                .orElse(null);
+    }
 }
