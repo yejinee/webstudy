@@ -10,9 +10,6 @@ public class HttpRequest {
         this.requestLine = new RequestLine(br.readLine()); // 2. 1st 줄을 읽는다
     }
 
-    public void getQueryString() {
-    }
-
     public QueryStrings getQueryStrings() {
         return requestLine.getQueryStrings();
     }
