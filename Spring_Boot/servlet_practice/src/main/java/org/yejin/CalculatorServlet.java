@@ -9,18 +9,9 @@ import javax.servlet.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-public class CalculatorServlet implements Servlet {
+public class CalculatorServlet extends GenericServlet {
     private static final Logger log = LoggerFactory.getLogger(CalculatorServlet.class);
     private ServletConfig servletConfig;
-
-    // Lifecycle 관리 (init/ service /destroy)
-    @Override
-    public void init(ServletConfig servletConfig) throws ServletException {
-        // Servlet 생성 후, 초기화 작업 수행
-        log.info("init");
-        this.servletConfig = servletConfig;
-    }
-
 
     @Override
     public void service(ServletRequest request, ServletResponse response) throws ServletException, IOException {
@@ -36,21 +27,4 @@ public class CalculatorServlet implements Servlet {
         PrintWriter writer = response.getWriter();
         writer.println(result);
     }
-
-    @Override
-    public void destroy() {
-        // resource release
-
-    }
-
-    @Override
-    public ServletConfig getServletConfig() {
-        return this.servletConfig;
-    }
-
-    @Override
-    public String getServletInfo() {
-        return null;
-    }
-
 }
