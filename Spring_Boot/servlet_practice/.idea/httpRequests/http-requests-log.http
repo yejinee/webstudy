@@ -1,0 +1,39 @@
+GET http://localhost:8080/calculate
+GET http:
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-01-09T203239.400.html
+
+###
+
+GET http://localhost:8080/calculate
+GET http:
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-01-09T180253.400.html
+
+###
+
+GET http://localhost:8080/calculate
+GET http:
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-01-09T180229.400.html
+
+###
+
+GET http://localhost:8080/calculate?operand1=20&operator=-&operand2=10
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-01-09T175408.404.html
+
+###
+
