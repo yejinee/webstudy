@@ -6,15 +6,18 @@ import org.yejin.calculator.domain.Calculator;
 import org.yejin.calculator.domain.PositiveNumber;
 
 import javax.servlet.*;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-public class CalculatorServlet extends GenericServlet {
+public class CalculatorServlet extends HttpServlet {
     private static final Logger log = LoggerFactory.getLogger(CalculatorServlet.class);
     private ServletConfig servletConfig;
 
     @Override
-    public void service(ServletRequest request, ServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         log.info("service");
         // 1. client로부터 값 얻어옴
         int operand1 = Integer.parseInt(request.getParameter("operand1"));
