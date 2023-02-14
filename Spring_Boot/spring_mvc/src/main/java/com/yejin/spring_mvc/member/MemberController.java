@@ -6,6 +6,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Min;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,24 +17,22 @@ public class MemberController {
 
     // 회원 정보 등록
     @PostMapping
-
     public ResponseEntity postMember(@Valid @RequestBody MemberPostDto memberPostDto) {
         return new ResponseEntity<>(memberPostDto, HttpStatus.CREATED);
     }
 
     // 회원 정보 수정
     @PatchMapping("/{member-id}")
-    public ResponseEntity patchMember(@PathVariable("member-id") long memberId,
+    public ResponseEntity patchMember(@PathVariable("member-id") @Min(1) long memberId,
                                       @Valid @RequestBody MemberPatchDto memberPatchDto) {
         memberPatchDto.setMemberId(memberId);
-        memberPatchDto.setName("홍길동");
 
         return new ResponseEntity<>(memberPatchDto, HttpStatus.OK);
     }
 
     // 한명의 회원 정보 조회
     @GetMapping("/{member-id}")
-    public ResponseEntity getMember(@PathVariable("member-id") long memberId) {
+    public ResponseEntity getMember(@PathVariable("member-id") @Min(1) long memberId) {
         System.out.println("# memberId: " + memberId);
 
         return new ResponseEntity<Map>(HttpStatus.OK);
@@ -48,7 +47,7 @@ public class MemberController {
 
     // 회원 정보 삭제
     @DeleteMapping("/{member-id}")
-    public ResponseEntity deleteMember(@PathVariable("member-id") long memberId) {
+    public ResponseEntity deleteMember(@PathVariable("member-id") @Min(1) long memberId) {
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
