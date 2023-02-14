@@ -13,28 +13,18 @@ public class MemberController {
 
     // 회원 정보 등록
     @PostMapping
-    public ResponseEntity postMember(@RequestParam("email") String email,
-                                     @RequestParam("name") String name,
-                                     @RequestParam("phone") String phone) {
-        Map<String, String> body = new HashMap<>();
-        body.put("email", email);
-        body.put("name", name);
-        body.put("phone", phone);
-
-        return new ResponseEntity<Map>(body, HttpStatus.CREATED);
+    public ResponseEntity postMember(@RequestBody MemberPostDto memberPostDto) {
+        return new ResponseEntity<>(memberPostDto, HttpStatus.CREATED);
     }
 
     // 회원 정보 수정
     @PatchMapping("/{member-id}")
     public ResponseEntity patchMember(@PathVariable("member-id") long memberId,
-                                      @RequestParam String phone) {
-        Map<String, Object> body = new HashMap<>();
-        body.put("memberId", memberId);
-        body.put("email", "hgd@gmail.com");
-        body.put("name", "홍길동");
-        body.put("phone", phone);
+                                      @RequestBody MemberPatchDto memberPatchDto) {
+        memberPatchDto.setMemberId(memberId);
+        memberPatchDto.setName("홍길동");
 
-        return new ResponseEntity<Map>(body, HttpStatus.OK);
+        return new ResponseEntity<>(memberPatchDto, HttpStatus.OK);
     }
 
     // 한명의 회원 정보 조회

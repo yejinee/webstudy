@@ -11,27 +11,17 @@ import java.util.Map;
 @RequestMapping("/v1/coffees")
 public class CoffeeController {
     @PostMapping
-    public ResponseEntity postCoffee(@RequestParam("korName") String korName,
-                                     @RequestParam("engName") String engName,
-                                     @RequestParam("price") int price) {
-        Map<String, Object> map = new HashMap<>();
-        map.put("korName", korName);
-        map.put("engName", engName);
-        map.put("price", price);
-
-        return new ResponseEntity<Map>(map, HttpStatus.CREATED);
+    public ResponseEntity postCoffee(@RequestBody CoffeePostDto coffeePostDto) {
+        return new ResponseEntity<>(coffeePostDto, HttpStatus.CREATED);
     }
-
     @PatchMapping("/{coffee-id}")
     public ResponseEntity patchCoffee(@PathVariable("coffee-id") long coffeeId,
-                                      @RequestParam("korName") String korName,
-                                      @RequestParam("price") int price) {
-        Map<String, Object> body = new HashMap<>();
-        body.put("coffeeId", coffeeId);
-        body.put("korName", korName);
-        body.put("engName", "Vanilla Latte");
-        body.put("price", price);
-        return new ResponseEntity(body, HttpStatus.OK);
+                                      @RequestBody CoffeePatchDto coffeePatchDto) {
+
+        coffeePatchDto.setCoffeeId(coffeeId);
+        coffeePatchDto.setKorname("바닐라 라떼");
+        coffeePatchDto.setPrice("5000");
+        return new ResponseEntity(coffeePatchDto, HttpStatus.OK);
     }
 
     @GetMapping("/{coffee-id}")
