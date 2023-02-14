@@ -2,25 +2,29 @@ package com.yejin.spring_mvc.member;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.Map;
 
 @RestController
 @RequestMapping("/v1/members")
+@Validated
 public class MemberController {
 
     // 회원 정보 등록
     @PostMapping
-    public ResponseEntity postMember(@RequestBody MemberPostDto memberPostDto) {
+
+    public ResponseEntity postMember(@Valid @RequestBody MemberPostDto memberPostDto) {
         return new ResponseEntity<>(memberPostDto, HttpStatus.CREATED);
     }
 
     // 회원 정보 수정
     @PatchMapping("/{member-id}")
     public ResponseEntity patchMember(@PathVariable("member-id") long memberId,
-                                      @RequestBody MemberPatchDto memberPatchDto) {
+                                      @Valid @RequestBody MemberPatchDto memberPatchDto) {
         memberPatchDto.setMemberId(memberId);
         memberPatchDto.setName("홍길동");
 
