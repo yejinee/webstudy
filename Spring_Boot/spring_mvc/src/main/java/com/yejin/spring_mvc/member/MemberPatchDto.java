@@ -1,5 +1,6 @@
 package com.yejin.spring_mvc.member;
 
+import com.yejin.spring_mvc.validator.NotSpace;
 import lombok.Getter;
 import lombok.Setter;
 
