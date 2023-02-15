@@ -1,7 +1,10 @@
 package com.yejin.spring_mvc.member;
 
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 
+@Service
 public class MemberService {
     // PostMember()
     public Member createMember(Member member) {
