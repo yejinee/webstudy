@@ -1,4 +1,5 @@
 package com.yejin.spring_mvc.member.controller;
+import com.yejin.spring_mvc.Response.ErrorResponse;
 import com.yejin.spring_mvc.member.mapper.MemberMapper;
 import com.yejin.spring_mvc.member.service.MemberService;
 import com.yejin.spring_mvc.member.dto.MemberPatchDto;
@@ -89,10 +90,20 @@ public class MemberController {
         - 해당 Exception 발생 시, handleException 메서드 실행(예외처리)
          */
 
-        // 에러 정보 확인 가능
+        // 1. 모든 에러 정보 확인 가능
         final List<FieldError> fieldErrors = e.getBindingResult().getFieldErrors();
 
+        // 2. 필요한 에러 정보들만 선택적으로 걸라서 전달
+        List<ErrorResponse.FieldError> errors =
+                fieldErrors.stream()
+                        .map(error -> new ErrorResponse.FieldError(
+                                error.getField(),
+                                error.getRejectedValue(),
+                                error.getDefaultMessage()))
+                        .collect(Collectors.toList());
+
+
         // 에러 정보를  Response Body로 전달
-        return new ResponseEntity<>(fieldErrors, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(new ErrorResponse(errors), HttpStatus.BAD_REQUEST);
     }
 }
