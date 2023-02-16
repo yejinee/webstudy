@@ -22,8 +22,10 @@ public class MemberService {
     // getMember()
     public Member findMember(long memberId) {
         // DB 조회
-        Member member = new Member(memberId, "aa@gmail.com", "yejin", "010-1111-2222");
-        return member;
+        //Member member = new Member(memberId, "aa@gmail.com", "yejin", "010-1111-2222");
+        //return member;
+        // Ex. DB에 조회할 수 없기 때문에 예외처리 진행
+        throw new RuntimeException("Not found member");
     }
     // getMembers()
     public List<Member> findMembers() {
