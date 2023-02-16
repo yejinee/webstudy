@@ -6,9 +6,12 @@ import com.yejin.spring_mvc.member.dto.MemberPostDto;
 import com.yejin.spring_mvc.member.dto.MemberResponseDto;
 import com.yejin.spring_mvc.member.entity.Member;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -19,6 +22,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/v1/members")
 @Validated
+@Slf4j
 public class MemberController {
     private final MemberService memberService;
     private final MemberMapper memberMapper;
@@ -76,4 +80,19 @@ public class MemberController {
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
+
+    @ExceptionHandler
+    public ResponseEntity handleException(MethodArgumentNotValidException e) {
+        /*
+        Case ) Validation 실패한 경우
+        - MethodArgumentNotValidException 발생
+        - 해당 Exception 발생 시, handleException 메서드 실행(예외처리)
+         */
+
+        // 에러 정보 확인 가능
+        final List<FieldError> fieldErrors = e.getBindingResult().getFieldErrors();
+
+        // 에러 정보를  Response Body로 전달
+        return new ResponseEntity<>(fieldErrors, HttpStatus.BAD_REQUEST);
+    }
 }
