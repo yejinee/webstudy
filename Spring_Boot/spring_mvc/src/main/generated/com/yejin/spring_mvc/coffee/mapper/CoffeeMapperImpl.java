@@ -4,12 +4,14 @@ import com.yejin.spring_mvc.coffee.dto.CoffeePatchDto;
 import com.yejin.spring_mvc.coffee.dto.CoffeePostDto;
 import com.yejin.spring_mvc.coffee.dto.CoffeeResponseDto;
 import com.yejin.spring_mvc.coffee.entity.Coffee;
+import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.processing.Generated;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-02-15T17:46:04+0900",
+    date = "2023-02-20T15:30:12+0900",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 11.0.12 (Oracle Corporation)"
 )
 @Component
@@ -65,5 +67,19 @@ public class CoffeeMapperImpl implements CoffeeMapper {
         CoffeeResponseDto coffeeResponseDto = new CoffeeResponseDto( coffeeId, korName, engName, price );
 
         return coffeeResponseDto;
+    }
+
+    @Override
+    public List<CoffeeResponseDto> coffeesToCoffeeResponseDtos(List<Coffee> coffees) {
+        if ( coffees == null ) {
+            return null;
+        }
+
+        List<CoffeeResponseDto> list = new ArrayList<CoffeeResponseDto>( coffees.size() );
+        for ( Coffee coffee : coffees ) {
+            list.add( coffeeToCoffeeResponseDto( coffee ) );
+        }
+
+        return list;
     }
 }

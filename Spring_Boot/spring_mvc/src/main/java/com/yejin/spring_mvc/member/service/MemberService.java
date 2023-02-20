@@ -1,5 +1,7 @@
 package com.yejin.spring_mvc.member.service;
 
+import com.yejin.spring_mvc.exception.BusinessLogicException;
+import com.yejin.spring_mvc.exception.ExceptionCode;
 import com.yejin.spring_mvc.member.entity.Member;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +27,7 @@ public class MemberService {
         //Member member = new Member(memberId, "aa@gmail.com", "yejin", "010-1111-2222");
         //return member;
         // Ex. DB에 조회할 수 없기 때문에 예외처리 진행
-        throw new RuntimeException("Not found member");
+        throw new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND);
     }
     // getMembers()
     public List<Member> findMembers() {

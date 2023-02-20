@@ -1,7 +1,10 @@
 package com.yejin.spring_mvc.advice;
 
 import com.yejin.spring_mvc.Response.ErrorResponse;
+import com.yejin.spring_mvc.exception.BusinessLogicException;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -30,11 +33,34 @@ public class GlobalExceptionAdvice {
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ErrorResponse handleResourceNotFoundException(RuntimeException e) {
+    public ErrorResponse handleBusinessLogicException(BusinessLogicException e) {
+        System.out.println(e.getExceptionCode().getStatus());
         System.out.println(e.getMessage());
 
-        return null;
+        // ErrorResponse 수정은 실습 과제로 대신합니다.
+        return ErrorResponse.of(e);
+    }
+// TODO GlobalExceptionAdvice 기능 추가 2
+    // @ExceptionHandler
+    // @ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
+    // public ErrorResponse handleHttpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException e){
+    //     final ErrorResponse response = ErrorResponse.of(HttpStatus.METHOD_NOT_ALLOWED);
+    //     return response;
+    // }
+
+    // 2-1
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
+    public ErrorResponse handleHttpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException e) {
+        return ErrorResponse.of(e);
     }
 
+
+    // TODO GlobalExceptionAdvice 기능 추가 3
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
+    public ErrorResponse handleException(Exception e) {
+        return ErrorResponse.of(e);
+    }
 
 }
