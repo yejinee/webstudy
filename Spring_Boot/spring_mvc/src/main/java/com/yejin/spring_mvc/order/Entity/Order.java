@@ -1,4 +1,4 @@
-package com.yejin.spring_mvc.order.Entity;
+package com.yejin.spring_mvc.order.entity;
 
 import com.yejin.spring_mvc.member.entity.Member;
 import lombok.Getter;

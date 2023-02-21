@@ -1,6 +1,6 @@
 package com.yejin.spring_mvc.order.repository;
 
-import com.yejin.spring_mvc.order.Entity.Order;
+import com.yejin.spring_mvc.order.entity.Order;
 import org.springframework.data.repository.CrudRepository;
 
 public interface OrderRepository extends CrudRepository<Order, Long> {

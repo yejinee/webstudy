@@ -25,7 +25,6 @@ import java.util.stream.Collectors;
 @Validated
 @Slf4j
 public class CoffeeController {
-
     private final CoffeeService coffeService;
     private final CoffeeMapper coffeeMapper;
 

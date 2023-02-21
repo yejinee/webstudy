@@ -1,0 +1,15 @@
+## POST http://localhost:8080//v1/members
+## Content-Type: application/json
+## {
+##     "email": "hgd@gmail.com",
+##     "name": "홍길동",
+##     "phone": "010-1234-5555"
+## }
+
+##
+## GET http://localhost:8080/v1/members
+
+
+
+
+GET http://localhost:8080/v1/coffees
