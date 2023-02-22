@@ -2,30 +2,27 @@ package com.yejin.spring_mvc.order.controller;
 
 import com.yejin.spring_mvc.coffee.service.CoffeeService;
 import com.yejin.spring_mvc.order.dto.OrderPostDto;
+import com.yejin.spring_mvc.order.dto.OrderResponseDto;
 import com.yejin.spring_mvc.order.entity.Order;
 import com.yejin.spring_mvc.order.mapper.OrderMapper;
 import com.yejin.spring_mvc.order.service.OrderService;
+import com.yejin.spring_mvc.utils.UriCreator;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import com.yejin.spring_mvc.order.dto.OrderResponseDto;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 import java.net.URI;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/v1/orders")
 @Validated
 public class OrderController {
-
-    private final static String ORDER_DEFAULT_URL = "/v10/orders"; // (1) Default URL 경로
+    private final static String ORDER_DEFAULT_URL = "/v1/orders"; // (1) Default URL 경로
     private final OrderService orderService;
     private final OrderMapper mapper;
     private final CoffeeService coffeeService;
@@ -43,13 +40,7 @@ public class OrderController {
         Order order = orderService.createOrder(mapper.orderPostDtoToOrder(orderPostDto));
 
         // 등록된 주문에 해당하는 URI 객체
-        URI location =
-                UriComponentsBuilder    // 등록된 리소스의 위치 정보 (URI 객체) 생성
-                        .newInstance()
-                        .path(ORDER_DEFAULT_URL + "/{order-id}")
-                        .buildAndExpand(order.getOrderId())
-                        .toUri();               // "/v10/orders/{order-id}"
-
+        URI location = UriCreator.createUri(ORDER_DEFAULT_URL, order.getOrderId());
 
         return ResponseEntity.created(location).build();    // 응답객체 리턴 ( HTTP 201 Created status )
     }
@@ -67,8 +58,7 @@ public class OrderController {
 
         // (5) 주문한 커피 정보를 가져오도록 수정
         List<OrderResponseDto> response =
-                orders
-                        .stream()
+                orders.stream()
                         .map(order -> mapper.orderToOrderResponseDto(coffeeService, order))
                         .collect(Collectors.toList());
 

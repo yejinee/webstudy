@@ -8,7 +8,9 @@ import lombok.Setter;
 import javax.validation.constraints.Positive;
 
 @Getter
+@Setter
 @AllArgsConstructor
+@NoArgsConstructor
 public class OrderCoffeeDto {
     @Positive
     private long coffeeId;

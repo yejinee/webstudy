@@ -1,10 +1,10 @@
 package com.yejin.spring_mvc.coffee.dto;
 
-import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 
 @Getter
-@AllArgsConstructor
+@Builder
 public class CoffeeResponseDto {
     private long coffeeId;
     private String korName;

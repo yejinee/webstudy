@@ -1,7 +1,6 @@
 package com.yejin.spring_mvc.coffee.dto;
 
 import lombok.Getter;
-import lombok.Setter;
 import org.hibernate.validator.constraints.Range;
 
 import javax.validation.constraints.NotBlank;

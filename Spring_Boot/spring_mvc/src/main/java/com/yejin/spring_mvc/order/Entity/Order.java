@@ -14,7 +14,7 @@ import java.util.Set;
 
 @Getter
 @Setter
-@Table("ORDERS")    // 테이블명 변경 (ORDER 사용 못하기 때문)
+@Table("ORDERS")   // 테이블명 변경 (ORDER 사용 못하기 때문)
 public class Order {
     @Id
     private long orderId;
@@ -23,12 +23,13 @@ public class Order {
     private AggregateReference<Member, Long> memberId;
 
     // N:N관계의 애그리거트 매핑 (N:N관계를 1:N , N:1로 풀어줄 엔티티가 필요함)
-    @MappedCollection(idColumn = "ORDER_ID", keyColumn = "ORDER_COFFEE_ID")    // Entity 클래스 간에 연관관계 맺어줌
+    @MappedCollection(idColumn = "ORDER_ID")    // Entity 클래스 간에 연관관계 맺어줌
     // (idColumn => 외래키에 해당되는 컬럼명/ keyColumn => 외래키를 포함하고 있는 기본키 컬럼명)
     private Set<CoffeeRef> orderCoffees = new LinkedHashSet<>();
 
+
     private OrderStatus orderStatus = OrderStatus.ORDER_REQUEST;    // 주문 상태 정보
-    private LocalDateTime createdAt = LocalDateTime.now();  // 주문 등록 시간
+    private LocalDateTime createdAt;  // 주문 등록 시간
 
     public enum OrderStatus{
         ORDER_REQUEST(1, "주문 요청"),

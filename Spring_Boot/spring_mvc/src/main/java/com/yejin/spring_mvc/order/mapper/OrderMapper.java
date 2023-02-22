@@ -19,23 +19,21 @@ import java.util.stream.Collectors;
 @Mapper(componentModel = "spring")
 public interface OrderMapper {
     // 여러잔의 커피정보를 매핑해야하므로 MapStruct 사용 X
-    default Order orderPostDtoToOrder(OrderPostDto orderPostDto){
+    default Order orderPostDtoToOrder(OrderPostDto orderPostDto) {
         Order order = new Order();
-        order.setMemberId(
-                new AggregateReference.IdOnlyAggregateReference(orderPostDto.getMemberId()));
+        order.setMemberId(new AggregateReference.IdOnlyAggregateReference(orderPostDto.getMemberId()));
         Set<CoffeeRef> orderCoffees = orderPostDto.getOrderCoffees()
                 .stream()
-                .map(orderCoffeeDto ->
-                        CoffeeRef.builder()
-                                .coffeeId(orderCoffeeDto.getCoffeeId())
-                                .quantity(orderCoffeeDto.getQuantity())
-                                .build())
+                .map(orderCoffeeDto -> new CoffeeRef(orderCoffeeDto.getCoffeeId(),
+                        orderCoffeeDto.getQuantity()))
                 .collect(Collectors.toSet());
         order.setOrderCoffees(orderCoffees);
-
+        order.setCreatedAt(LocalDateTime.now());
         return order;
-    };
-    default OrderResponseDto orderToOrderResponseDto(CoffeeService coffeeService, Order order){
+    }
+    default OrderResponseDto orderToOrderResponseDto(CoffeeService coffeeService,
+                                                     Order order) {
+
         long memberId = order.getMemberId().getId();
 
         List<OrderCoffeeResponseDto> orderCoffees =
@@ -53,18 +51,19 @@ public interface OrderMapper {
         return orderResponseDto;
     }
 
-    default List<OrderCoffeeResponseDto> orderToOrderCoffeeResponseDto(CoffeeService coffeeService, Set<CoffeeRef> orderCoffees){
+    default List<OrderCoffeeResponseDto> orderToOrderCoffeeResponseDto(
+            CoffeeService coffeeService,
+            Set<CoffeeRef> orderCoffees) {
         return orderCoffees.stream()
                 .map(coffeeRef -> {
                     Coffee coffee = coffeeService.findCoffee(coffeeRef.getCoffeeId());
-
                     return new OrderCoffeeResponseDto(coffee.getCoffeeId(),
                             coffee.getKorName(),
                             coffee.getEngName(),
                             coffee.getPrice(),
                             coffeeRef.getQuantity());
                 }).collect(Collectors.toList());
-    };
+    }
 
 
 }
